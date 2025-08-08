@@ -99,14 +99,99 @@
     .hero-subtitle {
       font-size: 24px;
       color: rgba(255, 255, 255, 0.86);
-      margin-bottom: 100px;
+      margin-bottom: 60px;
       font-weight: 400;
       letter-spacing: -0.005em;
       line-height: 1.21429;
       max-width: 640px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .hero-cta-section {
       margin-bottom: 100px;
+      text-align: center;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: white;
+      text-decoration: none;
+      padding: 16px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.12),
+        0 3px 10px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.15),
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.15) 100%);
+    }
+
+    .hero-cta:hover::before {
+      opacity: 1;
+    }
+
+    .hero-cta:active {
+      transform: translateY(-1px);
+    }
+
+    .cta-icon {
+      font-size: 20px;
+      animation: subtleBounce 3s ease-in-out infinite;
+    }
+
+    .cta-subtitle {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.65);
+      letter-spacing: -0.005em;
+    }
+
+    @keyframes subtleBounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-2px);
+      }
     }
 
     /* Demo Section */
@@ -456,6 +541,72 @@
       letter-spacing: 0;
     }
 
+    .download-section {
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #007AFF 0%, #0056CC 100%);
+      color: white;
+      text-decoration: none;
+      padding: 16px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 
+        0 8px 25px rgba(0, 122, 255, 0.25),
+        0 3px 10px rgba(0, 122, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 35px rgba(0, 122, 255, 0.35),
+        0 5px 15px rgba(0, 122, 255, 0.2);
+    }
+
+    .download-btn:hover::before {
+      opacity: 1;
+    }
+
+    .download-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .download-icon {
+      font-size: 18px;
+      animation: bounceDown 2s ease-in-out infinite;
+    }
+
+    @keyframes bounceDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(3px);
+      }
+    }
+
     /* Footer - Apple Style */
     .footer {
       text-align: center;
@@ -547,6 +698,15 @@
         <div class="logo-text">Sift</div>
       </div>
       <p class="hero-subtitle">Instantly finds the perfect folder for every bookmark</p>
+      <div class="hero-cta-section">
+        <a href="sift-extension.zip" download="sift-extension.zip" class="hero-cta">
+          <span class="cta-icon">⬇</span>
+          <div class="cta-text">
+            <span>Download & Install</span>
+            <span class="cta-subtitle">Developer preview - manual setup</span>
+          </div>
+        </a>
+      </div>
     </header>
 
     <section class="demo-section">
@@ -604,18 +764,18 @@
         <div class="faq-answer">
           Currently, Sift is not available on the Chrome Web Store. You can install it manually:
           <div class="install-code">
-            1. Download or clone the extension files<br>
-            2. Open Chrome → Settings → Extensions<br>
-            3. Enable "Developer mode"<br>
-            4. Click "Load unpacked" and select the extension folder
+            1. Download the extension files using the button below<br>
+            2. Extract the zip file to a folder<br>
+            3. Open Chrome → Settings → Extensions<br>
+            4. Enable "Developer mode"<br>
+            5. Click "Load unpacked" and select the extracted extension folder
           </div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question">What do I need to use Sift?</div>
-        <div class="faq-answer">
-          You'll need an OpenAI API key to power the intelligent categorization. You can get one from OpenAI's website and configure it in the Settings tab.
+          <div class="download-section">
+            <a href="sift-extension.zip" download="sift-extension.zip" class="download-btn">
+              <span class="download-icon">⬇</span>
+              Download Sift Extension
+            </a>
+          </div>
         </div>
       </div>
 
@@ -623,6 +783,27 @@
         <div class="faq-question">How does it work?</div>
         <div class="faq-answer">
           Sift analyzes the content of web pages you want to bookmark and uses AI to suggest the most appropriate folder from your existing bookmark structure. You can always adjust the folder if needed.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What do I need to use Sift?</div>
+        <div class="faq-answer">
+          You'll need an OpenAI API key to power the intelligent categorization. Currently, Sift only works with OpenAI's models (specifically GPT-4). You can get an API key from OpenAI's website and configure it in the Settings tab. Support for other AI providers like Claude, Gemini, or local models might come in future versions of this side project.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How much does it cost to use?</div>
+        <div class="faq-answer">
+          Each bookmark categorization costs roughly <strong>$0.01-0.03</strong> in OpenAI API usage (depending on your folder structure size and page content length). So if you bookmark 50 pages a month, expect around $0.50-1.50 in API costs. The extension is designed to be lightweight—it only sends the page title, meta description, and first 2000 characters of content to keep token usage minimal.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How does bookmark organization work?</div>
+        <div class="faq-answer">
+          Sift works with your <em>existing</em> bookmark folder structure. It analyzes page content and suggests which of your current folders would be the best fit. It doesn't create new folders automatically—you'll need to have a reasonably organized bookmark structure already set up for it to work effectively. This is a limitation of the current version, but it keeps things simple for this little side project. I might add auto-folder creation in future updates!
         </div>
       </div>
 
