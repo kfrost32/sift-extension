@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Sift",
+  "version": "2.0",
+  "description": "Instantly finds the perfect folder for every bookmark",
+  "permissions": [
+    "bookmarks",
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png"
+    }
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ]
+}
