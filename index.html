@@ -46,12 +46,25 @@
       padding: 0 20px;
     }
 
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+    }
+
     /* Header */
     .header {
       padding: 100px 0 0;
       text-align: center;
       max-width: 980px;
       margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 60px 0 0;
+        max-width: 100%;
+      }
     }
 
     .logo {
@@ -90,6 +103,23 @@
       text-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     }
 
+    @media (max-width: 768px) {
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 32px;
+      }
+      
+      .logo-text {
+        font-size: 36px;
+      }
+      
+      .logo {
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+    }
+
     .hero-subtitle {
       font-size: 24px;
       color: rgba(255, 255, 255, 0.86);
@@ -102,9 +132,24 @@
       margin-right: auto;
     }
 
+    @media (max-width: 768px) {
+      .hero-subtitle {
+        font-size: 20px;
+        margin-bottom: 40px;
+        max-width: 100%;
+        padding: 0 8px;
+      }
+    }
+
     .hero-cta-section {
       margin-bottom: 100px;
       text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero-cta-section {
+        margin-bottom: 60px;
+      }
     }
 
     .hero-cta {
@@ -194,6 +239,12 @@
       position: relative;
     }
 
+    @media (max-width: 768px) {
+      .demo-section {
+        margin-bottom: 80px;
+      }
+    }
+
     .demo-title {
       font-size: 56px;
       font-weight: 600;
@@ -212,12 +263,29 @@
       width: 1200px;
       max-width: 90vw;
       margin: 0 auto;
-      height: 720px;
+      aspect-ratio: 5/3;
       background: 
         linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
       border-radius: 28px;
       overflow: hidden;
       position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 1300px) {
+      .browser-window {
+        max-width: 95vw;
+        border-radius: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .browser-window {
+        max-width: 98vw;
+        border-radius: 16px;
+        aspect-ratio: 4/3;
+      }
     }
 
     /* Dynamic backgrounds for each scenario */
@@ -295,7 +363,7 @@
 
     .browser-content {
       position: relative;
-      height: 640px;
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -305,6 +373,7 @@
     /* Extension Popup */
     .extension-popup {
       width: 420px;
+      max-width: 90%;
       background: #ffffff;
       border-radius: 20px;
       box-shadow: 
@@ -315,6 +384,17 @@
       z-index: 10;
       position: relative;
       transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    @media (max-width: 768px) {
+      .extension-popup {
+        width: 340px;
+        max-width: 95%;
+        border-radius: 16px;
+        box-shadow: 
+          0 20px 40px rgba(0, 0, 0, 0.2),
+          0 10px 20px rgba(0, 0, 0, 0.1);
+      }
     }
 
     .extension-content {
@@ -461,6 +541,23 @@
       border: 1px solid rgba(255, 255, 255, 0.6);
     }
 
+    @media (max-width: 1024px) {
+      .faq-section {
+        margin: 120px auto 40px;
+        padding: 60px 40px;
+        border-radius: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .faq-section {
+        margin: 80px auto 40px;
+        padding: 40px 24px;
+        border-radius: 20px;
+        max-width: calc(100% - 32px);
+      }
+    }
+
     .faq-title {
       font-size: 48px;
       font-weight: 600;
@@ -469,6 +566,13 @@
       color: #1d1d1f;
       letter-spacing: -0.003em;
       line-height: 1.08333;
+    }
+
+    @media (max-width: 768px) {
+      .faq-title {
+        font-size: 36px;
+        margin-bottom: 40px;
+      }
     }
 
     .faq-item {
@@ -492,12 +596,25 @@
       line-height: 1.16667;
     }
 
+    @media (max-width: 768px) {
+      .faq-question {
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+    }
+
     .faq-answer {
       color: #424245;
       line-height: 1.47059;
       font-size: 19px;
       font-weight: 400;
       letter-spacing: -0.022em;
+    }
+
+    @media (max-width: 768px) {
+      .faq-answer {
+        font-size: 16px;
+      }
     }
 
     .install-code {
@@ -511,6 +628,15 @@
       color: #1d1d1f;
       line-height: 1.47059;
       letter-spacing: 0;
+    }
+
+    @media (max-width: 768px) {
+      .install-code {
+        padding: 20px 24px;
+        font-size: 14px;
+        border-radius: 14px;
+        margin: 20px 0;
+      }
     }
 
     .download-section {
