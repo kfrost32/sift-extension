@@ -20,23 +20,30 @@ async function handleCategorization(url, title, content, meta, sendResponse) {
 
   chrome.storage.sync.get("openai_key", async ({ openai_key }) => {
     if (!openai_key) {
-      console.error("No OpenAI API key found");
       sendResponse({ error: "No API key configured" });
       return;
     }
 
-    console.log("Building prompt with:", { title, meta: meta?.substring(0, 50), content: content?.substring(0, 50), folderCount: folderPaths.length });
-    const prompt = `Page Title: ${title || 'Unknown'}\nMeta Description: ${meta || 'None'}\nContent: ${content || 'None'}\n\nFolders:\n${folderList}\n\nWhich folder path best matches this content? Reply with only the exact folder path.`;
+    // Validate API key format
+    if (!openai_key.startsWith('sk-') || openai_key.length < 20) {
+      sendResponse({ error: "Invalid API key format" });
+      return;
+    }
+
+    // Sanitize inputs to prevent potential issues
+    const sanitizedTitle = (title || 'Unknown').slice(0, 200).replace(/[<>]/g, '');
+    const sanitizedMeta = (meta || 'None').slice(0, 300).replace(/[<>]/g, '');
+    const sanitizedContent = (content || 'None').slice(0, 2000).replace(/[<>]/g, '');
+    
+    const prompt = `Page Title: ${sanitizedTitle}\nMeta Description: ${sanitizedMeta}\nContent: ${sanitizedContent}\n\nFolders:\n${folderList}\n\nWhich folder path best matches this content? Reply with only the exact folder path.`;
 
     let response;
     try {
-      console.log("Making OpenAI API request...");
       const requestBody = {
         model: DEFAULT_MODEL,
         messages: [{ role: "user", content: prompt }],
         temperature: 0.4
       };
-      console.log("Request body:", { model: requestBody.model, messageLength: requestBody.messages[0]?.content?.length });
       
       response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
@@ -47,21 +54,18 @@ async function handleCategorization(url, title, content, meta, sendResponse) {
         body: JSON.stringify(requestBody)
       });
     } catch (fetchError) {
-      console.error("Network error during fetch:", fetchError);
-      sendResponse({ error: `Network error: ${fetchError.message}` });
+      sendResponse({ error: "Network error occurred" });
       return;
     }
 
     try {
       if (!response) {
-        console.error("OpenAI API request failed: No response received");
         sendResponse({ error: "Network error: No response received" });
         return;
       }
 
       if (!response.ok) {
-        console.error("OpenAI API request failed:", response.status, response.statusText);
-        sendResponse({ error: `API request failed: ${response.status}` });
+        sendResponse({ error: `API request failed with status ${response.status}` });
         return;
       }
 
@@ -69,18 +73,17 @@ async function handleCategorization(url, title, content, meta, sendResponse) {
       try {
         data = await response.json();
       } catch (parseError) {
-        console.error("Failed to parse OpenAI API response:", parseError);
         sendResponse({ error: "Failed to parse API response" });
         return;
       }
     
       if (!data || !data.choices || !data.choices[0] || !data.choices[0].message) {
-        console.error("Invalid OpenAI API response:", data);
-        sendResponse({ error: "Invalid API response" });
+        sendResponse({ error: "Invalid API response format" });
         return;
       }
     
-    const aiPath = data.choices[0].message.content.trim();
+    // Sanitize AI response
+    const aiPath = data.choices[0].message.content.trim().slice(0, 500);
     const bestMatch = folderPaths.find(f => f.fullPath === aiPath);
 
     if (bestMatch) {
@@ -100,8 +103,7 @@ async function handleCategorization(url, title, content, meta, sendResponse) {
     }
     
     } catch (processingError) {
-      console.error("Response processing error:", processingError);
-      sendResponse({ error: processingError.message });
+      sendResponse({ error: "Error processing response" });
     }
   });
 }
