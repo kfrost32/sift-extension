@@ -1014,7 +1014,7 @@
       initialState.classList.add('active');
       successState.classList.remove('active');
       
-      // After 3 seconds, show success
+      // After 2 seconds, show success
       setTimeout(() => {
         successState.classList.add('active');
         
@@ -1022,11 +1022,11 @@
           initialState.classList.remove('active');
         }, 300);
         
-        // After 4 more seconds, transition to next scenario
+        // After 2.5 more seconds, transition to next scenario
         setTimeout(() => {
           transitionToNextScenario();
-        }, 4000);
-      }, 3000);
+        }, 2500);
+      }, 2000);
     }
 
     // Initialize demo
